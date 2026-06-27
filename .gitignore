@@ -1,0 +1,15 @@
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local Database
+*.sqlite3
+
+# VS Code configurations
+.vscode/
