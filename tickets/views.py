@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Ticket
 from .forms import TicketForm
@@ -25,3 +25,22 @@ class TicketDetailView(DetailView):
     model = Ticket
     template_name = 'tickets/ticket_detail.html'
     context_object_name = 'ticket' # Singular form for a single object
+
+class TicketUpdateView(UpdateView):
+    """
+    View to handle updating an existing ticket.
+    Reuses the TicketForm and ticket_form.html template.
+    """
+    model = Ticket
+    form_class = TicketForm
+    template_name = 'tickets/ticket_form.html' # Reusing the template!
+    success_url = reverse_lazy('ticket_list')
+
+class TicketDeleteView(DeleteView):
+    """
+    View to handle deleting an existing ticket.
+    Asks for confirmation before removing the record from the database.
+    """
+    model = Ticket
+    template_name = 'tickets/ticket_confirm_delete.html' # HTML for safety confirmation
+    success_url = reverse_lazy('ticket_list') # Redirects back to list after deleting

@@ -35,6 +35,8 @@
         </div>
 
         <a href="{% url 'ticket_list' %}" class="btn-back">← Back to Dashboard</a>
+        <a href="{% url 'ticket_update' ticket.id %}" style="background-color: #f39c12; text-decoration: none; color: white; padding: 10px 15px; border-radius: 4px; font-size: 14px; display: inline-block; margin-left: 10px;">Edit Ticket</a>
+        <a href="{% url 'ticket_delete' ticket.id %}" style="background-color: #e74c3c; text-decoration: none; color: white; padding: 10px 15px; border-radius: 4px; font-size: 14px; display: inline-block; margin-left: 10px;">Delete Ticket</a>
     </div>
 
 </body>

@@ -14,7 +14,7 @@ class TicketForm(forms.ModelForm):
     class Meta:
         model = Ticket
         # We only expose fields that the user should fill
-        fields = ['title', 'description', 'priority']
+        fields = ['title', 'description', 'priority', 'status']
         
         # Adding HTML attributes to style fields nicely later
         widgets = {
