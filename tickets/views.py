@@ -1,4 +1,4 @@
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from django.urls import reverse_lazy
 from .models import Ticket
 from .forms import TicketForm
@@ -11,13 +11,17 @@ class TicketListView(ListView):
     ordering = ['-created_at']
 
 class TicketCreateView(CreateView):
-    """
-    View to handle the creation of a new ticket.
-    Renders the form and saves valid data to the database.
-    """
+    """View to handle the creation of a new ticket."""
     model = Ticket
     form_class = TicketForm
     template_name = 'tickets/ticket_form.html'
-    
-    # Redirects the user back to the list view after successfully submitting the form
     success_url = reverse_lazy('ticket_list')
+
+class TicketDetailView(DetailView):
+    """
+    View to display the full details of a single ticket.
+    Automatically fetches the object based on the ID passed via URL.
+    """
+    model = Ticket
+    template_name = 'tickets/ticket_detail.html'
+    context_object_name = 'ticket' # Singular form for a single object
