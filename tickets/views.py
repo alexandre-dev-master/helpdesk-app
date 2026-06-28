@@ -1,6 +1,6 @@
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import UserCreationForm # Importa o formulário de cadastro padrão
+from django.contrib.auth.forms import UserCreationForm 
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from .models import Ticket
@@ -12,13 +12,10 @@ class TicketListView(LoginRequiredMixin, ListView):
     context_object_name = 'tickets'
 
     def get_queryset(self):
-        # 1. Start by getting only the current user's tickets
         queryset = Ticket.objects.filter(user=self.request.user)
         
-        # 2. Catch the 'status' parameter from the URL (e.g., /?status=open)
         status_filter = self.request.GET.get('status')
         
-        # 3. If there is a filter, apply it to the database search
         if status_filter:
             queryset = queryset.filter(status=status_filter.upper())
             
@@ -53,13 +50,12 @@ class TicketDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'tickets/ticket_confirm_delete.html'
     success_url = reverse_lazy('ticket_list')
 
-# Adicione esta função simples no final do seu arquivo views.py
 def register_view(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
-            form.save() # Salva o novo usuário no banco de dados
-            return redirect('login') # Manda direto para a tela de login
+            form.save()
+            return redirect('login') 
     else:
         form = UserCreationForm()
     
