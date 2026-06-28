@@ -118,7 +118,6 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-# Onde o Django procura a tela de login e para onde ele manda após o login feito
-LOGIN_URL = 'login'
+# Where Django looks for the login screen and where it redirects after a successful loginLOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'ticket_list'
 LOGOUT_REDIRECT_URL = 'login'
