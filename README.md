@@ -10,6 +10,10 @@ Dynamic Dashboard Filters: Fast filtering by ticket status (Open, In Progress, R
 
 Full CRUD Operations: Structured handling of priority levels and custom statuses.
 
+## Demo
+
+![Helpdesk App Demo](media/demo.gif)
+
 Tech Stack
 Backend: Python 3.12+ / Django 5.x
 
