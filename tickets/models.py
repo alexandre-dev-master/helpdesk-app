@@ -1,32 +1,28 @@
 from django.db import models
+from django.contrib.auth.models import User # Imported Django's built-in User model
 
 class Ticket(models.Model):
-    """
-    Represents a technical support ticket within the helpdesk system.
-    Stores information about the issue, its current status, and priority level.
-    """
-    
-    # Status options using standard Django choices tuple
-    STATUS_CHOICES = [
-        ('open', 'Open'),
-        ('in_progress', 'In Progress'),
-        ('resolved', 'Resolved'),
-    ]
-
-    # Priority options to determine urgency
     PRIORITY_CHOICES = [
-        ('low', 'Low'),
-        ('medium', 'Medium'),
-        ('high', 'High'),
+        ('LOW', 'Low'),
+        ('MEDIUM', 'Medium'),
+        ('HIGH', 'High'),
     ]
 
+    STATUS_CHOICES = [
+        ('OPEN', 'Open'),
+        ('IN_PROGRESS', 'In Progress'),
+        ('RESOLVED', 'Resolved'),
+    ]
+
+    # New field: links the ticket to a User. 
+    # If the user is deleted, all their tickets are deleted too (on_delete=models.CASCADE).
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tickets')
+    
     title = models.CharField(max_length=100)
     description = models.TextField()
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='open')
-    priority = models.CharField(max_length=20, choices=PRIORITY_CHOICES, default='medium')
+    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='LOW')
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='OPEN')
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        """Returns a readable string representation of the ticket."""
-        return f"[{self.priority.upper()}] {self.title}"
+        return f"#{self.id} - {self.title}"

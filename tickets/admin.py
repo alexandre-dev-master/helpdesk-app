@@ -9,7 +9,7 @@ class TicketAdmin(admin.ModelAdmin):
     """
     
     # Fields to display in the list view table
-    list_display = ('title', 'status', 'priority', 'created_at', 'updated_at')
+    list_display = ('title', 'status', 'priority', 'created_at')
     
     # Sidebar filters to easily sort through tickets
     list_filter = ('status', 'priority', 'created_at')
